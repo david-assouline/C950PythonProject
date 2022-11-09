@@ -26,7 +26,7 @@ class HashTable:
                     return self.data_map[index][i][1]
         return None
 
-    def keys(self):
+    def get_keys(self):
         all_keys = []
         for i in range(len(self.data_map)):
             if self.data_map[i] is not None:
