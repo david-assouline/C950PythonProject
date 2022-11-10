@@ -1,8 +1,11 @@
 from hash_map import HashTable
 
 truck_one = HashTable(12)
+truck_one_destinations = []
 truck_two = HashTable(8)
+truck_two_destinations = []
 truck_three = HashTable(20)
+truck_three_destinations = []
 
 
 def load_trucks():
@@ -11,13 +14,16 @@ def load_trucks():
     truck_one.set_item("14", "4300 S 1300 E")
     truck_one.set_item("15", "4580 S 2300 E")
     truck_one.set_item("16", "4580 S 2300 E")
+    truck_one.set_item("34", "4580 S 2300 E")
     truck_one.set_item("20", "3595 Main St")
     truck_one.set_item("29", "1330 2100 S")
     truck_one.set_item("30", "300 State St")
     truck_one.set_item("31", "3365 S 900 W")
-    truck_one.set_item("34", "4580 S 2300 E")
     truck_one.set_item("37", "410 S State St")
     truck_one.set_item("40", "380 W 2880 S")
+
+    for i in truck_one.get_keys():
+        truck_one_destinations.append(truck_one.get_item(i))
 
     truck_two.set_item("3", "233 Canyon Rd")
     truck_two.set_item("6", "3060 Lester St")
@@ -27,6 +33,9 @@ def load_trucks():
     truck_two.set_item("32", "3365 S 900 W")
     truck_two.set_item("36", "2300 Parkway Blvd")
     truck_two.set_item("38", "410 S State St")
+
+    for i in truck_two.get_keys():
+        truck_two_destinations.append(truck_two.get_item(i))
 
     truck_three.set_item("2", "2530 S 500 E")
     truck_three.set_item("4", "380 W 2880 S")
@@ -48,3 +57,6 @@ def load_trucks():
     truck_three.set_item("33", "2530 S 500 E")
     truck_three.set_item("35", "1060 Dalton Ave S")
     truck_three.set_item("39", "2010 W 500 S")
+
+    for i in truck_three.get_keys():
+        truck_three_destinations.append(truck_three.get_item(i))
