@@ -18,6 +18,10 @@ class HashTable:
             self.data_map[index] = []
         self.data_map[index].append([key, value])
 
+    def delete_item(self, key):
+        index = self.__hash(key)
+        self.data_map.pop(index)
+
     def get_item(self, key):
         index = self.__hash(key)
         if self.data_map[index] is not None:
@@ -25,6 +29,14 @@ class HashTable:
                 if self.data_map[index][i][0] == key:
                     return self.data_map[index][i][1]
         return None
+
+    def get_all_items(self):
+        all_items = []
+        for i in range(len(self.data_map)):
+            if self.data_map[i] is not None:
+                for j in range(len(self.data_map[i])):
+                    all_items.append(self.data_map[i][j][1])
+        return all_items
 
     def get_keys(self):
         all_keys = []

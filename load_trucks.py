@@ -1,9 +1,11 @@
 from hash_map import HashTable
 
+truck_one = HashTable(12)
+truck_two = HashTable(8)
+truck_three = HashTable(20)
+
 
 def load_trucks():
-    truck_one, truck_two, truck_three = HashTable(12), HashTable(8), HashTable(20)
-
     truck_one.set_item("1", "195 W Oakland Ave")
     truck_one.set_item("13", "2010 W 500 S")
     truck_one.set_item("14", "4300 S 1300 E")
