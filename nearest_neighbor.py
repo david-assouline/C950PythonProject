@@ -6,7 +6,6 @@ from calculate_distance import calculate_distance
 
 
 def find_nearest_neighbor(truck_destinations, current_location):
-    data = read_csv("data/distance_name_data.csv")
     temp_distance = 1000
     temp_loc = None
     for potential_location in truck_destinations:
