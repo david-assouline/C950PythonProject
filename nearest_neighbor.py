@@ -17,7 +17,10 @@ def find_nearest_neighbor(truck_destinations, current_location):
             temp_loc = potential_location
         else:
             pass
-    return temp_distance, temp_loc
+    if temp_distance == 1000:
+        return 0, temp_loc
+    else:
+        return temp_distance, temp_loc
 
 
 def distance_to_time(distance):
