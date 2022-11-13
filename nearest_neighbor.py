@@ -1,7 +1,3 @@
-from datetime import datetime
-
-from pandas import read_csv
-
 from calculate_distance import calculate_distance
 
 
