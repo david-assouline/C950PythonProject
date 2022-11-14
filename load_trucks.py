@@ -1,7 +1,5 @@
 import csv
 
-from pandas import read_csv
-
 from hash_map import HashTable
 
 truck_one = HashTable(12)
@@ -66,9 +64,7 @@ def load_trucks():
     for i in truck_three.get_keys():
         truck_three_destinations.append(truck_three.get_item(i))
 
-    input_file = csv.DictReader(open("data/input_data.csv"))
+    input_file = csv.DictReader(open("input_data.csv"))
     for row in input_file:
         all_packages.set_item(row["1"], [row["2"], row["3"], row["4"], row["5"], row["6"], row["7"], row["8"], "At The Hub"])
-    # for i in range(39):
-    #     print(all_packages.get_item(str(i)))
 

@@ -13,11 +13,13 @@ def calculate_distance(first_loc, second_loc):
         param2 = int(index_two) + 1
     for index, row in enumerate(input_file):
         if index == param1:
-            return float(row[str(param2)])
-
+            return row[str(param2)]
 
 def get_index(location):
     input_file = csv.DictReader(open("distance_name_data.csv"))
     for row in input_file:
         if row["C3"] == location:
             return row["C1"]
+
+
+print(calculate_distance("1488 4800 S","4001 South 700 East"))
