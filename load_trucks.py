@@ -66,5 +66,5 @@ def load_trucks():
 
     input_file = csv.DictReader(open("input_data.csv"))
     for row in input_file:
-        all_packages.set_item(row["1"], [row["2"], row["3"], row["4"], row["5"], row["6"], row["7"], row["8"], "At The Hub"])
+        all_packages.set_item(row["1"], [row["2"], row["3"], row["4"], row["5"], row["6"], row["7"], row["8"], -1, "At The Hub"])
 

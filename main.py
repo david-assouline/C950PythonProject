@@ -2,12 +2,13 @@
 import datetime
 from load_trucks import load_trucks, truck_one_destinations, truck_two_destinations, truck_three_destinations, \
     truck_one, all_packages, truck_two, truck_three
+from lookup_package import lookup_package
 from nearest_neighbor import find_nearest_neighbor, distance_to_time
 from print_report import generate_report
 
 # initializes the departure time of truck 1 & 2 (November 11th at 8:00 A.M. and 8:30 A.M.)
 truck_one_time = datetime.datetime(2022, 11, 11, 8, 0, 0)
-truck_two_three_time = datetime.datetime(2022, 11, 11, 8, 30, 0)
+truck_two_three_time = datetime.datetime(2022, 11, 11, 8, 45, 0)
 
 # initializes the odometer at 0 miles
 truck_one_total_distance = 0
@@ -22,7 +23,7 @@ truck_one_next_destination = "195 W Oakland Ave"
 truck_two_next_destination = "233 Canyon Rd"
 truck_three_next_destination = "2530 S 500 E"
 
-# removes the destination of package #9 since it is a wrong address. The correct one will be added later/
+# removes the destination of package #9 since it is a wrong address. The correct one will be added later
 truck_three_destinations.remove("300 State St")
 truck_three_new_address = False
 
@@ -66,6 +67,7 @@ while True:
         # changes the status of the given package from "En Route" to "Delivered" and logs the time of delivery
         for i in packages_about_to_be_delivered:
             all_packages.get_item(i)[-1] = f"Delivered at {truck_one_time}"
+            all_packages.get_item(i)[-2] = truck_one_time
 
         # generates a report after each delivery of every package and its status, including each truck's
         # odometer, and prints it to console.
@@ -90,6 +92,7 @@ while True:
         truck_two_three_time += datetime.timedelta(minutes=distance_to_time(distance))
         for i in packages_about_to_be_delivered:
             all_packages.get_item(i)[-1] = f"Delivered at {truck_two_three_time}"
+            all_packages.get_item(i)[-2] = truck_two_three_time
         generate_report(truck_one_total_distance, truck_two_total_distance, truck_three_total_distance, truck_two_three_time)
 
     if len(truck_two_destinations) == 0 and len(truck_three_destinations) > 0:
@@ -99,7 +102,7 @@ while True:
                 if i in truck_three.get_keys():
                     all_packages.get_item(i)[-1] = "En Route"
             truck_three_en_route = True
-        if truck_two_three_time > datetime.datetime(2022, 11, 11, 10, 29 ,59):
+        if truck_two_three_time > datetime.datetime(2022, 11, 11, 10, 29, 59):
             if not truck_three_new_address:
                 truck_three_destinations.append("410 S State St")
                 truck_three_new_address = True
@@ -122,7 +125,21 @@ while True:
         truck_two_three_time += datetime.timedelta(minutes=distance_to_time(distance))
         for i in packages_about_to_be_delivered:
             all_packages.get_item(i)[-1] = f"Delivered at {truck_two_three_time}"
+            all_packages.get_item(i)[-2] = truck_two_three_time
         generate_report(truck_one_total_distance, truck_two_total_distance, truck_three_total_distance,
                         truck_two_three_time)
     if len(truck_three_destinations) == 0:
-        break
+        print("Welcome to the WGUPS interface! Please select an option:")
+        while True:
+            user_selection = input("Enter 1 to lookup a package\nEnter 2 to exit this application\n")
+            if user_selection == "2":
+                exit(1)
+            elif user_selection == "1":
+                package_number = input("What is the Package ID?\n")
+                package_hour = input("What is the lookup hour (0-23)?\n")
+                package_minute = input("What is the lookup minute (0-59)?\n")
+                lookup_package(package_number, datetime.datetime(2022, 11, 11, int(package_hour), int(package_minute)))
+                print("*" * 40)
+            else:
+                print("Input not recognized. Please try again")
+
